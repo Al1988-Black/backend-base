@@ -1,6 +1,6 @@
 const yargs = require("yargs");
 const pkg = require("./package.json");
-const { addNote, getNotes } = require("./node.controller");
+const { addNote, getNotes } = require("./notes.controller");
 
 yargs.version(pkg.version);
 
