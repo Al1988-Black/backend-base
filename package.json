@@ -13,6 +13,7 @@
     "author": "Alexey Chernov <alexblackskja@gmail.com>",
     "license": "ISC",
     "dependencies": {
+        "chalk": "^5.1.2",
         "yargs": "^17.6.2"
     }
 }
