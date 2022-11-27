@@ -22,13 +22,24 @@ async function getNotes() {
     return Array.isArray(JSON.parse(notes)) ? JSON.parse(notes) : [];
 }
 
-async function deleteNote(id) {
+async function removeNote(id) {
     const notes = await getNotes();
 
     const newNotes = notes.filter((note) => note.id !== id);
     await fs.writeFile(notesPath, JSON.stringify(newNotes)); // записываем новую запись в db.json
     console.log(`Note with ${id} delete`);
     // console.log(chalk.bgGreen("Note was added"));
+}
+
+async function updateNote(data) {
+    const updateNote = JSON.parse(data);
+    const notes = await getNotes();
+    const indexUpdate = notes.findIndex((note) => note.id === updateNote.id);
+    console.log(indexUpdate);
+    notes[indexUpdate] = { title: updateNote.title, id: updateNote.id };
+    await fs.writeFile(notesPath, JSON.stringify(notes)); // записываем новую запись в db.json
+    console.log(`Note with ${updateNote.id} updated`);
+    //console.log(chalk.bgGreen("Note was added"));
 }
 
 async function printNotes() {
@@ -43,6 +54,8 @@ async function printNotes() {
 
 module.exports = {
     addNote,
+    getNotes,
     printNotes,
-    deleteNote,
+    removeNote,
+    updateNote,
 };
